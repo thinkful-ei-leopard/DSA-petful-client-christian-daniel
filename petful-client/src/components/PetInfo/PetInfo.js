@@ -40,6 +40,9 @@ export default class PetInfo extends React.Component {
     render() {
         return(
             <div className='petInfoDiv'>
+                <h2> 
+                    <Link to="/"> Home </Link>
+                </h2>
             <header>
                 <h1>Pets to Adopt</h1>
             </header>

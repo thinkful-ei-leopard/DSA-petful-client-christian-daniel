@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import config from '../config'
 import Animal from './PetInfo/AnimalLists/Animal/Animal'
 import PeopleList from './PeopleList'
@@ -166,6 +167,9 @@ export default class Pets_In_Line extends React.Component {
     render() {
         return(
             <div className='petNext'>
+                <h2> 
+                    <Link to="/"> Home </Link>
+                </h2>
                 <header>
                     <h1> Adopt a Pet </h1>
                 </header>
