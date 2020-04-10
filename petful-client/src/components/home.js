@@ -9,8 +9,14 @@ export default class Home extends React.Component {
 
         }
     }
+
+    onAdopt = () => {
+        const { history } = this.props;
+        history.push("/adoption");
+      };
     render() {
         return (
+            <div>
             <heading>
                 <h1>Welcome to Petful!</h1>
                 <p classname="intro">This is an online animal shelter which allows you to adopt cats and dogs. <br></br>
@@ -20,7 +26,8 @@ export default class Home extends React.Component {
                 </p>
                 <img src={dog_cat} />
             </heading>
-
+            <button type="click" className="adopt-button" onClick={this.onAdopt}>Start Adoption Process</button>
+        </div>
         )
     }
 }
