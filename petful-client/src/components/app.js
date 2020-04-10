@@ -1,7 +1,8 @@
 import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Home from './home'
-import Adoption from './adoption'
+import PetInfo from './PetInfo/PetInfo'
+import Pets_In_Line from './pets-in-line'
 
 function App() {
     return (
@@ -17,11 +18,18 @@ function App() {
             />
             <Route
               exact
-              path="/Adoption"
+              path="/PetInfo"
               render={renderProps => {
-                return <Adoption {...renderProps} />;
+                return <PetInfo {...renderProps} />;
               }}
             />
+            <Route
+              exact
+              path="/PetsInLine"
+              render={renderProps => {
+                return <Pets_In_Line {...renderProps} />;
+              }}
+              />
           </Switch>
           </BrowserRouter>
         </div>
