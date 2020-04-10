@@ -5,7 +5,11 @@ import Animal from './PetInfo/AnimalLists/Animal/Animal'
 import PeopleList from './PeopleList'
 
 export default class Pets_In_Line extends React.Component {
-    
+    constructor(props) {
+        super(props);
+        this.adoptConfirm = this.adoptConfirm.bind(this);
+      }
+
     state = {
         currentDog: {},
         currentCat: {},
@@ -162,6 +166,9 @@ export default class Pets_In_Line extends React.Component {
         this.setState({interval: interval})
     }
 
+    adoptConfirm() {
+        alert('Adoption confirmed!')
+    }
 
 
     render() {
@@ -177,16 +184,16 @@ export default class Pets_In_Line extends React.Component {
                     e.preventDefault()
                     this.addUserToQueue(e)
                     this.dequeueTimer()}}>
-                    <label htmlFor='name'> Add yourself to queue:</label>
+                    <label htmlFor='name'> Add yourself to queue: </label>
                         <input type="text" name="name" />
                         <input type="submit" />
                 </form>
                 <main>
                     <PeopleList key={this.state.currQueue} people={this.state.currQueue} />
                     <Animal key={this.state.currentDog.name} animal={this.state.currentDog}/>
-                    <button type ='delete' onClick={this.deleteDog}> Adopt this Dog! </button>
+                    <button type ='delete' onClick={this.deleteDog.adoptConfirm}> Adopt this Dog! </button>
                     <Animal key={this.state.currentCat.name} animal={this.state.currentCat}/>
-                    <button type ='delete' onClick={this.deleteCat}> Adopt this Cat! </button>
+                    <button type ='delete' onClick={this.deleteCat.adoptConfirm}> Adopt this Cat! </button>
                 </main>
             </div>
         )
