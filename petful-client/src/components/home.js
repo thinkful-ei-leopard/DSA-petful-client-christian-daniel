@@ -12,7 +12,7 @@ export default class Home extends React.Component {
 
     onAdopt = () => {
         const { history } = this.props;
-        history.push("/adoption");
+        history.push("/PetInfo");
       };
     render() {
         return (

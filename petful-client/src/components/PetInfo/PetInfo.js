@@ -32,6 +32,11 @@ export default class PetInfo extends React.Component {
         })
         )
     }
+
+    onAdoptLine = () => {
+        const { history } = this.props;
+        history.push("/PetsInLine");
+      };
     render() {
         return(
             <div className='petInfoDiv'>
@@ -41,6 +46,7 @@ export default class PetInfo extends React.Component {
             <main>
                 <DogsList dogs={this.state.dogs}/>
                 <CatsList cats={this.state.cats}/>
+                <button type="click" className="adoption-button" onClick={this.onAdoptLine}>Start Adopting</button>
             </main>
             </div>
         )

@@ -133,9 +133,9 @@ export default class Pets_In_Line extends React.Component {
         )
     }
 
-    enqueuePeopleAfter = () {
+    // enqueuePeopleAfter = () {
         
-    }
+    // }
 
     dequeuePersonAndPet = () => {
         console.log(this.state.currUser)
