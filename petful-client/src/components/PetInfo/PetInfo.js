@@ -46,10 +46,10 @@ export default class PetInfo extends React.Component {
             <header>
                 <h1>Pets to Adopt</h1>
             </header>
-            <main>
+            <main> 
+                <button type="click" className="adoption-button" onClick={this.onAdoptLine}>Start Adopting</button>
                 <DogsList dogs={this.state.dogs}/>
                 <CatsList cats={this.state.cats}/>
-                <button type="click" className="adoption-button" onClick={this.onAdoptLine}>Start Adopting</button>
             </main>
             </div>
         )

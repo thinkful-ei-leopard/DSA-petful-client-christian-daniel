@@ -3,6 +3,7 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Home from './home'
 import PetInfo from './PetInfo/PetInfo'
 import Pets_In_Line from './pets-in-line'
+import PetsAdopted from './PetsAdopted'
 
 function App() {
     return (
@@ -28,6 +29,13 @@ function App() {
               path="/PetsInLine"
               render={renderProps => {
                 return <Pets_In_Line {...renderProps} />;
+              }}
+              />
+              <Route
+              exact
+              path="/PetsAdopted"
+              render={renderProps => {
+                return <PetsAdopted {...renderProps} />;
               }}
               />
           </Switch>

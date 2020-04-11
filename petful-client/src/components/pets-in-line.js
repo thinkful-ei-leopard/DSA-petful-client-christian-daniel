@@ -5,10 +5,6 @@ import Animal from './PetInfo/AnimalLists/Animal/Animal'
 import PeopleList from './PeopleList'
 
 export default class Pets_In_Line extends React.Component {
-    constructor(props) {
-        super(props);
-        this.adoptConfirm = this.adoptConfirm.bind(this);
-      }
 
     state = {
         currentDog: {},
@@ -113,6 +109,7 @@ export default class Pets_In_Line extends React.Component {
                         currentDog: pets[1],
                         currentCat: pets[0]
                      })
+                    
                 })
             })
         )
@@ -147,7 +144,7 @@ export default class Pets_In_Line extends React.Component {
         console.log(this.state.currQueue[0])
         if(this.state.currQueue[1] == this.state.currUser) {
             clearInterval(this.state.interval)
-            setInterval()
+            setInterval(clearInterval)
         }
         let num = Math.random() * 100;
         if (num < 50) {
@@ -166,10 +163,6 @@ export default class Pets_In_Line extends React.Component {
         this.setState({interval: interval})
     }
 
-    adoptConfirm() {
-        alert('Adoption confirmed!')
-    }
-
 
     render() {
         return(
@@ -179,6 +172,7 @@ export default class Pets_In_Line extends React.Component {
                 </h2>
                 <header>
                     <h1> Adopt a Pet </h1>
+                    <Link to="/PetsAdopted"> Pets Adopted </Link>
                 </header>
                 <form onSubmit={(e) => {
                     e.preventDefault()
@@ -191,9 +185,9 @@ export default class Pets_In_Line extends React.Component {
                 <main>
                     <PeopleList key={this.state.currQueue} people={this.state.currQueue} />
                     <Animal key={this.state.currentDog.name} animal={this.state.currentDog}/>
-                    <button type ='delete' onClick={this.deleteDog.adoptConfirm}> Adopt this Dog! </button>
+                    <button type ='delete' onClick={this.deleteDog}> Adopt this Dog! </button>
                     <Animal key={this.state.currentCat.name} animal={this.state.currentCat}/>
-                    <button type ='delete' onClick={this.deleteCat.adoptConfirm}> Adopt this Cat! </button>
+                    <button type ='delete' onClick={this.deleteCat}> Adopt this Cat! </button>
                 </main>
             </div>
         )

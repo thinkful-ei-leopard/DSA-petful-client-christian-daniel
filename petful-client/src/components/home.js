@@ -17,7 +17,7 @@ export default class Home extends React.Component {
     render() {
         return (
             <div>
-            <heading>
+            <header>
                 <h1>Welcome to Petful!</h1>
                 <p className="intro">This is an online animal shelter which allows you to adopt cats and dogs. <br></br>
                     This is strictly based on "First in, First out". You can adopt a cat, a dog <br></br>
@@ -25,7 +25,7 @@ export default class Home extends React.Component {
                     You will be put into queues so you must wait for your turn.
                 </p>
                 <img src={dog_cat} />
-            </heading>
+            </header>
             <button type="click" className="adopt-button" onClick={this.onAdopt}>Start Adoption Process</button>
         </div>
         )
