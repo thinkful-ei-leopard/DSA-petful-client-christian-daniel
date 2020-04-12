@@ -12,6 +12,15 @@ export default class Pets_In_Line extends React.Component {
         currQueue: [],
         currUser: '',
         interval: '',
+        enqueueInterval: '',
+        peopleAfter: [
+            'Jim Reynor',
+            'Sarah Kerrigan',
+            'Tychus Findlay',
+            'Valerian Mengsk',
+            'Alexei Stukov'
+        ],
+        hidden: true,
     }
 
 
@@ -67,7 +76,30 @@ export default class Pets_In_Line extends React.Component {
                 return res.json()
             })
             .then(person => {
-                console.log(person)
+                this.setState({currQueue: [...this.state.currQueue, person],
+                currUser: person})
+            })
+            .then(this.fetchPeopleInQueue)
+        )
+    }
+
+    enqueuePerson = (personName) => {
+        let name = personName;
+        let person = JSON.stringify({
+            name: name
+        })
+        return (
+            fetch(`${config.API_ENDPOINT}/people`, {
+                method: 'POST',
+                headers: {
+                    'Content-type': 'application/json'
+                },
+                body: person
+            })
+            .then(res => {
+                return res.json()
+            })
+            .then(person => {
                 this.setState({currQueue: [...this.state.currQueue, person],
                 currUser: person})
             })
@@ -135,16 +167,26 @@ export default class Pets_In_Line extends React.Component {
         )
     }
 
-    // enqueuePeopleAfter = () {
-        
-    // }
+    enqueuePeopleAfter = () => {
+        if (this.state.peopleAfter.length <= 1) {
+            clearInterval(this.state.enqueueInterval)
+        }
+        this.enqueuePerson(this.state.peopleAfter[0]);
+            let arr = this.state.peopleAfter;
+            arr.shift();
+            this.setState({
+                peopleAfter: arr,
+            })
+    }
 
     dequeuePersonAndPet = () => {
-        console.log(this.state.currUser)
-        console.log(this.state.currQueue[0])
         if(this.state.currQueue[1] == this.state.currUser) {
             clearInterval(this.state.interval)
-            setInterval(clearInterval)
+            let enqueueInterval = setInterval(this.enqueuePeopleAfter, 2000);
+            this.setState({
+                enqueueInterval: enqueueInterval,
+                hidden: false,
+                });
         }
         let num = Math.random() * 100;
         if (num < 50) {
@@ -165,6 +207,35 @@ export default class Pets_In_Line extends React.Component {
 
 
     render() {
+        if (this.state.hidden) {
+            return(
+                <div className='petNext'>
+                    <h2> 
+                        <Link to="/"> Home </Link>
+                    </h2>
+                    <header>
+                        <h1> Adopt a Pet </h1>
+                        <Link to="/PetsAdopted"> Pets Adopted </Link>
+                    </header>
+                    <form onSubmit={(e) => {
+                        e.preventDefault()
+                        this.addUserToQueue(e)
+                        this.dequeueTimer()}}>
+                        <label htmlFor='name'> Add yourself to queue: </label>
+                            <input type="text" name="name" />
+                            <input type="submit" />
+                    </form>
+                    <main>
+                        <PeopleList key={this.state.currQueue} people={this.state.currQueue} />
+                        <ul>
+                        <Animal key={this.state.currentDog.name} animal={this.state.currentDog}/>
+                        <button type ='delete' onClick={this.deleteDog} className='hidden'> Adopt this Dog! </button>
+                        <Animal key={this.state.currentCat.name} animal={this.state.currentCat}/>
+                        <button type ='delete' onClick={this.deleteCat} className='hidden'> Adopt this Cat! </button>
+                        </ul>
+                    </main>
+                </div>
+        )}
         return(
             <div className='petNext'>
                 <h2> 
@@ -184,10 +255,20 @@ export default class Pets_In_Line extends React.Component {
                 </form>
                 <main>
                     <PeopleList key={this.state.currQueue} people={this.state.currQueue} />
+                    <ul>
                     <Animal key={this.state.currentDog.name} animal={this.state.currentDog}/>
-                    <button type ='delete' onClick={this.deleteDog}> Adopt this Dog! </button>
+                    <button type ='submit' onClick={(e) => {
+                        e.preventDefault()
+                        this.deleteDog()
+                        this.dequeuePerson()
+                    }} className='notHidden'> Adopt this Dog! </button>
                     <Animal key={this.state.currentCat.name} animal={this.state.currentCat}/>
-                    <button type ='delete' onClick={this.deleteCat}> Adopt this Cat! </button>
+                    <button type ='submit' onClick={(e) => {
+                        e.preventDefault()
+                        this.deleteCat()
+                        this.dequeuePerson()
+                    }} className='notHidden'> Adopt this Cat! </button>
+                    </ul>
                 </main>
             </div>
         )

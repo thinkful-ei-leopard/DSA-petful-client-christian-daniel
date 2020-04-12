@@ -1,0 +1,11 @@
+button {
+    background-color: whitesmoke;
+}
+
+ul {
+    list-style: none;
+}
+
+.hidden {
+    display: none;
+}
