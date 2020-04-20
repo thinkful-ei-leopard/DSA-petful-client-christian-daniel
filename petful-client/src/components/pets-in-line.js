@@ -21,6 +21,7 @@ export default class Pets_In_Line extends React.Component {
             'Alexei Stukov'
         ],
         hidden: true,
+        adopted: {name: ''},
     }
 
 
@@ -105,6 +106,16 @@ export default class Pets_In_Line extends React.Component {
             })
             .then(this.fetchPeopleInQueue)
         )
+    }
+
+    handleAdoptDog = () => {
+        let adopted = this.state.currentDog;
+        this.setState({adopted: adopted})
+    }
+
+    handleAdoptCat = () => {
+        let adopted = this.state.currentCat;
+        this.setState({adopted: adopted})
     }
 
     dequeuePerson = () => {
@@ -215,14 +226,14 @@ export default class Pets_In_Line extends React.Component {
                     </h2>
                     <header>
                         <h1> Adopt a Pet </h1>
-                        <Link to="/PetsAdopted"> Pets Adopted </Link>
+                        {/* <Link to="/PetsAdopted"> Pets Adopted </Link> */}
                     </header>
                     <form onSubmit={(e) => {
                         e.preventDefault()
                         this.addUserToQueue(e)
                         this.dequeueTimer()}}>
                         <label htmlFor='name'> Add yourself to queue: </label>
-                            <input type="text" name="name" />
+                            <input type="text" name="name" required/>
                             <input type="submit" />
                     </form>
                     <main>
@@ -230,8 +241,10 @@ export default class Pets_In_Line extends React.Component {
                         <ul>
                         <Animal key={this.state.currentDog.name} animal={this.state.currentDog}/>
                         <button type ='delete' onClick={this.deleteDog} className='hidden'> Adopt this Dog! </button>
+                        <p>Congratulations, you have adopted {this.state.adopted.name}</p>
                         <Animal key={this.state.currentCat.name} animal={this.state.currentCat}/>
                         <button type ='delete' onClick={this.deleteCat} className='hidden'> Adopt this Cat! </button>
+                        <p>Congratulations, you have adopted {this.state.adopted.name}</p>
                         </ul>
                     </main>
                 </div>
@@ -243,14 +256,14 @@ export default class Pets_In_Line extends React.Component {
                 </h2>
                 <header>
                     <h1> Adopt a Pet </h1>
-                    <Link to="/PetsAdopted"> Pets Adopted </Link>
+                    {/* <Link to="/PetsAdopted"> Pets Adopted </Link> */}
                 </header>
                 <form onSubmit={(e) => {
                     e.preventDefault()
                     this.addUserToQueue(e)
                     this.dequeueTimer()}}>
                     <label htmlFor='name'> Add yourself to queue: </label>
-                        <input type="text" name="name" />
+                        <input type="text" name="name" required/>
                         <input type="submit" />
                 </form>
                 <main>
@@ -259,15 +272,19 @@ export default class Pets_In_Line extends React.Component {
                     <Animal key={this.state.currentDog.name} animal={this.state.currentDog}/>
                     <button type ='submit' onClick={(e) => {
                         e.preventDefault()
+                        this.handleAdoptDog()
                         this.deleteDog()
                         this.dequeuePerson()
                     }} className='notHidden'> Adopt this Dog! </button>
+                    <p>Congratulations, you have adopted {this.state.adopted.name}</p>
                     <Animal key={this.state.currentCat.name} animal={this.state.currentCat}/>
                     <button type ='submit' onClick={(e) => {
                         e.preventDefault()
+                        this.handleAdoptCat()
                         this.deleteCat()
                         this.dequeuePerson()
                     }} className='notHidden'> Adopt this Cat! </button>
+                    <p>Congratulations, you have adopted {this.state.adopted.name}</p>
                     </ul>
                 </main>
             </div>
